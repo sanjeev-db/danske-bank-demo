@@ -53,19 +53,19 @@
 
 CREATE STREAMING LIVE TABLE raw_txs
   COMMENT "New raw loan data incrementally ingested from cloud object storage landing zone"
-AS SELECT * FROM cloud_files('/demo/dlt_loan/landing', 'json')
+AS SELECT * FROM cloud_files('/demo/danske-bank/dlt_loan/raw', 'json')
 
 -- COMMAND ----------
 
 CREATE LIVE TABLE ref_accounting_treatment
   COMMENT "Lookup mapping for accounting codes"
-AS SELECT * FROM delta.`/demo/dlt_loan/ref_accounting_treatment/`
+AS SELECT * FROM delta.`/demo/danske-bank/dlt_loan/ref_accounting_treatment/`
 
 -- COMMAND ----------
 
 CREATE STREAMING LIVE TABLE reference_loan_stats
   COMMENT "Raw historical transactions"
-AS SELECT * FROM cloud_files('/databricks-datasets/lending-club-loan-stats/LoanStats_*', 'csv')
+AS SELECT * FROM cloud_files('/demo/danske-bank/dlt_loan/loan_stats/LoanStats_*', 'csv') 
 
 -- COMMAND ----------
 
